@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.firstapp.R
+import com.example.firstapp.http.HiOkHttp
 import kotlinx.android.synthetic.main.fragment_study.*
 import kotlinx.android.synthetic.main.item_fragment_study.view.*
 

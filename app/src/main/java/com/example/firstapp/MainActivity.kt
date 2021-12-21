@@ -1,13 +1,19 @@
 package com.example.firstapp
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.firstapp.http.ApiService
 import com.example.firstapp.http.HiOkHttp
+import com.example.firstapp.http.HiRetrofit
+import retrofit2.Call
+import retrofit2.Response
+import javax.security.auth.callback.Callback
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,6 +34,19 @@ class MainActivity : AppCompatActivity() {
 //        HiOkHttp.getAsync()
 //        HiOkHttp.post()
 //        HiOkHttp.posyAsync()
-        HiOkHttp.postString()
+//        HiOkHttp.postString()
+
+//        //onResponse和onFailure都是在主线程中的
+//        val apiService=HiRetrofit.create(ApiService::class.java)
+//        apiService.queryUser("1600932269").enqueue(object : Callback,
+//            retrofit2.Callback<String> {
+//            override fun onResponse(call: Call<String>, response: Response<String>) {
+//                Log.e("Retrofit",response.body()?:"response is null")
+//            }
+//
+//            override fun onFailure(call: Call<String>, t: Throwable) {
+//                Log.e("Retrofit",t.message?:"unknown reason")
+//            }
+//        })
     }
 }

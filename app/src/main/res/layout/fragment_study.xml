@@ -95,6 +95,25 @@
             android:layout_height="wrap_content"
             android:text="我的专栏"
             android:layout_marginLeft="10dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="增加"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/course_add"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/course_delete"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="更新"
+            android:layout_marginLeft="10dp"
+            android:id="@+id/course_update"/>
+
     </LinearLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"

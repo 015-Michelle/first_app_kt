@@ -5,6 +5,7 @@ import android.os.Environment
 import android.util.Log
 import android.widget.Toast
 import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import org.json.JSONObject
 import java.io.IOException
 import java.util.concurrent.TimeUnit
@@ -20,7 +21,6 @@ object HiOkHttp{
         .connectTimeout(10, TimeUnit.SECONDS)//链接超时时间
         .readTimeout(10,TimeUnit.SECONDS)//读取超时
         .writeTimeout(10,TimeUnit.SECONDS)//写超时，也就是请求超时
-            .addInterceptor(HttpLoggingInterceptor())
         .build()
 
     //同步Get请求，一直等待http请求，直到返回了响应
@@ -41,7 +41,7 @@ object HiOkHttp{
             //发起同步请求execute --同步执行
             val response: Response =call.execute()
 
-            val body:String? =response.body().toString()
+            val body:String? = response.body.toString()
 
             Log.e("【OKHTTP】" ,"get response:${body}")
         }).start()
@@ -62,7 +62,7 @@ object HiOkHttp{
             }
 
             override fun onResponse(call: Call, response: Response) {
-                val body=response.body().toString()
+                val body= response.body.toString()
                 Log.e("【OKHTTP】" ,"get response:${body}")
             }
         } )
@@ -82,7 +82,7 @@ object HiOkHttp{
 
         Thread(Runnable {
             val response:Response=call.execute()
-            Log.e("【OKHTTP】","post response:${response.body().string()}")
+            Log.e("【OKHTTP】","post response:${response.body?.string()}")
         }).start()
 
     }
@@ -104,7 +104,7 @@ object HiOkHttp{
             }
 
             override fun onResponse(call: Call, response: Response) {
-                Log.e("【OKHTTP】","post OnResponse:${response.body().string()}")
+                Log.e("【OKHTTP】","post OnResponse:${response.body?.string()}")
             }
         })
     }
@@ -120,7 +120,7 @@ object HiOkHttp{
         val body=MultipartBody.Builder()
                 .addFormDataPart("key","value")
                 .addFormDataPart("key1","value1")
-                .addFormDataPart("file","本地文件file.png", RequestBody.create(MediaType.parse("application/octet-stream"),file))
+                .addFormDataPart("file","本地文件file.png", RequestBody.create("application/octet-stream".toMediaTypeOrNull(),file))
                 .build()
         val request =Request.Builder()
                 .url("接口是需要支持文件上传才可以使用的")
@@ -133,17 +133,17 @@ object HiOkHttp{
             }
 
             override fun onResponse(call: Call, response: Response) {
-                Log.e("[OKHTTP]","postAsyncMultipart onResponse:${response.body().string()}")
+                Log.e("[OKHTTP]","postAsyncMultipart onResponse:${response.body?.string()}")
             }
         })
     }
 
     //异步post请求【提交字符串】
     fun postString(){
-        val textPlain=MediaType.parse("text/plain;charset=utf-8")
+        val textPlain= "text/plain;charset=utf-8".toMediaTypeOrNull()
         val textObj="username：username;password:password"
 
-        val applicationJSON=MediaType.parse("application/json;charset:utf-8")
+        val applicationJSON= "application/json;charset:utf-8".toMediaTypeOrNull()
         val jsonObj=JSONObject()
         jsonObj.put("key1","value1")
         jsonObj.put("key2",100)
@@ -160,7 +160,7 @@ object HiOkHttp{
             }
 
             override fun onResponse(call: Call, response: Response) {
-                Log.e("[OKHTTP]","postString onResponse:${response.body().string()}")
+                Log.e("[OKHTTP]","postString onResponse:${response.body?.string()}")
             }
         })
     }

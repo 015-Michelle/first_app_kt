@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.firstapp">
 
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:allowBackup="true"
@@ -22,6 +24,22 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".components.SecondActivity"
+            android:label="@string/title_study">
+            <intent-filter>
+                <action android:name="com.example.firstapp.action.SECONDACTIVITY"/>
+                <category android:name="com.example.firstapp.action.SECONDACTIVITY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+        </activity>
+        <activity android:name=".components.ServiceActivity"
+            android:label="service">
+        </activity>
+
+        <service android:name=".components.TestService1"></service>
+        <service android:name=".components.TestService2"></service>
     </application>
 
 </manifest>
